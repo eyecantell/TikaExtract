@@ -1,0 +1,44 @@
+{
+    "name": "TikaExtract Development",
+    
+    "build": {
+      "dockerfile": "Dockerfile",
+      "context": ".."
+    },
+    
+    "remoteEnv": {
+    // To set the MODAL_TOKEN_INFO environment variable, need to 'pip install toml-cli' on dev machine and add the following lines to your .bashrc:
+    /* 
+      # Set and export the MODAL_TOKEN_INFO environment variable
+      if [ -f ~/.modal.toml ]; then
+        export MODAL_TOKEN_INFO=$(toml get --toml-path ~/.modal.toml)
+      fi
+    */
+    "MODAL_TOKEN_INFO": "${localEnv:MODAL_TOKEN_INFO}",
+    "SAMSCRAPE_CONFIG": "/workspaces/samscrape/samscrape_config.yml"
+    },
+    
+    "mounts": [
+      {
+        "type": "bind",
+        "source": "${localEnv:HOME}/dev/notice_data",
+        "target": "/notice_data"
+      },
+      {
+        "type": "bind",
+        "source": "${localEnv:HOME}/.netrc",
+        "target": "/home/developer/.netrc"
+      }
+    ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-azuretools.vscode-docker",
+                "ms-python.python",
+                "github.vscode-github-actions",
+                "be5invis.toml",
+                "vscjava.vscode-java-pack"
+            ]
+        }
+    }
+  }
