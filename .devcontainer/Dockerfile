@@ -5,7 +5,7 @@
 #    docker run -it samscrape-container /bin/bash
 
 # Use a base image with Python already installed
-FROM openjdk:24-slim
+FROM python:3.10-slim
 
 # Update apt 
 RUN apt-get -y update
@@ -18,7 +18,7 @@ RUN apt-get -y install curl
 RUN apt-get -y install tree
 
 # Install java runtime env
-#RUN apt-get -y install default-jdk
+RUN apt-get -y install default-jdk
 RUN apt-get -y install maven
 
 # Add .local/bin to PATH
