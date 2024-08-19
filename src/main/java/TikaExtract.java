@@ -9,14 +9,18 @@ import java.nio.file.*;
 
 public class TikaExtract {
     public static void main(String[] args) {
-        String path = "/notice_data/notices/FederalContractNotice/675798f955264ac5ab15a296a2a6fcac/ATTACHMENT-B-SOW-GM-MMNC-.docx";
-        extractFromDocument(path);
-        //System.out.println(xhtml);
+        if(args.length != 1) {
+            System.out.println("Usage: java TikaExtract <file_path>");
+            System.exit(1); // Exit with error code
+        }
+
+        String filePath = args[0];
+        extractFromDocument(filePath);
     }
 
     /* The extractFromDocument routine uses Apache Tika to:
             1. Extract content from the given document and save in <document_name>.tika.json
-            2. Extract images from given document and save them in a directory <document_name>_embedded
+            2. Extract images/other embedded items from given document and save them in a directory <document_name>.extracts_dir
     }*/
 
     private static String extractFromDocument(String path) {
