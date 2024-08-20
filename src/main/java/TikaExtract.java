@@ -3,6 +3,8 @@
   mvn clean package
   Then run with:
   mvn exec:java -e -Dexec.mainClass="TikaExtract" -Dexec.args="<filename_to_extract_stuff_from>"
+
+  Credit to Cardin @ https://stackoverflow.com/questions/25783212/extract-images-from-pdf-with-apache-tika for pointing me in the right direction.
 */  
 import org.apache.tika.parser.*;
 import org.apache.tika.sax.*;
