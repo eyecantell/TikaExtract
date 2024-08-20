@@ -22,6 +22,9 @@ RUN apt-get -y install default-jdk
 RUN apt-get -y install maven
 RUN apt-get -y install gradle
 
+# Install Tesseract for OCR in Tika
+RUN apt-get -y install tesseract-ocr
+
 # Add .local/bin to PATH
 ENV PATH=/home/developer/.local/bin:$PATH
 
