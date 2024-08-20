@@ -1,3 +1,9 @@
+/*
+  Build with:
+  mvn clean package
+  Then run with:
+  mvn exec:java -e -Dexec.mainClass="TikaExtract" -Dexec.args="<filename_to_extract_stuff_from>"
+*/  
 import org.apache.tika.parser.*;
 import org.apache.tika.sax.*;
 import org.apache.tika.metadata.*;
@@ -48,6 +54,8 @@ public class TikaExtract {
                 if (fileName == null) {
                     fileName = "embedded_" + System.currentTimeMillis();
                 }
+                
+                System.out.println("Writing extracted item '" + fileName + "'' to " + outputDir.toString());
                 Path outputPath = outputDir.resolve(fileName);
                 Files.copy(stream, outputPath, StandardCopyOption.REPLACE_EXISTING);
             }
