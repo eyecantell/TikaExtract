@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    implementation 'org.apache.tika:tika-core:1.27'
+    implementation 'org.apache.tika:tika-parsers:1.27'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'io.github.eyecantell.TikaExtract'
+    }
+    
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+task runJar(type: JavaExec, dependsOn: 'jar') {
+    main = 'io.github.eyecantell.TikaExtract'
+    classpath = sourceSets.main.runtimeClasspath
+}
