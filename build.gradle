@@ -12,6 +12,8 @@ repositories {
 dependencies {
     implementation 'org.apache.tika:tika-core:3.0.0-BETA2'
     implementation 'org.apache.tika:tika-parsers-standard-package:3.0.0-BETA2'
+    implementation 'slf4j-simple:2.0.13'
+    implementation 'log4j-core:2.20.0'
 }
 
 java {
