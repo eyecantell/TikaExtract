@@ -20,6 +20,7 @@ RUN apt-get -y install tree
 # Install java runtime env
 RUN apt-get -y install default-jdk
 RUN apt-get -y install maven
+RUN apt-get -y install gradle
 
 # Add .local/bin to PATH
 ENV PATH=/home/developer/.local/bin:$PATH

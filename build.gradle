@@ -1,28 +1,43 @@
 plugins {
-    id 'java'
     id 'application'
 }
 
+group = 'io.github.eyecantell'
+version = '0.1.0-SNAPSHOT'
+
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
-    implementation 'org.apache.tika:tika-core:1.27'
-    implementation 'org.apache.tika:tika-parsers:1.27'
+    implementation 'org.apache.tika:tika-core:3.0.0-BETA2'
+    implementation 'org.apache.tika:tika-parsers-standard-package:3.0.0-BETA2'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+application {
+    mainClass = 'TikaExtract'
 }
 
 jar {
     manifest {
-        attributes 'Main-Class': 'io.github.eyecantell.TikaExtract'
-    }
-    
-    from {
-        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+        attributes 'Main-Class': 'TikaExtract'
     }
 }
 
-task runJar(type: JavaExec, dependsOn: 'jar') {
-    main = 'io.github.eyecantell.TikaExtract'
-    classpath = sourceSets.main.runtimeClasspath
+
+task fatJar(type: Jar) {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    exclude 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA'
+    manifest {
+        attributes 'Main-Class': 'TikaExtract'
+    }
+    
+    archiveBaseName = "${project.name}-all"
+    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }
